@@ -1,1 +1,31 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: FontBlack;
+    src: url(../public/fonts/BeVietnamPro-Black.ttf);
+}
+
+@font-face {
+    font-family: FontExtraBold;
+    src: url(../public/fonts/BeVietnamPro-ExtraBold.ttf);
+}
+
+@font-face {
+    font-family: FontBold;
+    src: url(../public/fonts/BeVietnamPro-Bold.ttf);
+}
+
+@font-face {
+    font-family: FontLight;
+    src: url(../public/fonts/BeVietnamPro-Light.ttf);
+}
+
+@font-face {
+    font-family: FontExtraLight;
+    src: url(../public/fonts/BeVietnamPro-ExtraLight.ttf);
+}
+
+@font-face {
+    font-family: FontRegular;
+    src: url(../public/fonts/BeVietnamPro-Regular.ttf);
+}
