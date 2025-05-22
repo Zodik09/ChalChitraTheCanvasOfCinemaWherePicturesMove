@@ -1,9 +1,13 @@
-import Navbar from './Navbar'
+import Hero from "./Hero";
+import Navbar from "./Navbar";
 
 const TVShows = () => {
   return (
-    <><Navbar />TV Shows</>
-  )
-}
+    <>
+      <Hero type="tv" />
+      <Navbar />
+    </>
+  );
+};
 
-export default TVShows
+export default TVShows;

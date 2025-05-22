@@ -4,7 +4,7 @@ import Navbar from "./Navbar.jsx";
 const Home = () => {
   return (
     <div>
-      <Hero />
+      <Hero type="all" />
       <Navbar />
     </div>
   );

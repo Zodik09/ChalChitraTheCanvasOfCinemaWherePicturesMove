@@ -15,7 +15,7 @@ const Router = () => {
       <Route path="/movies" element={<Movies />} />
       <Route path="/sports" element={<Sports />} />
       <Route path="/search" element={<Search />} />
-      <Route path="*" element={<NotFound />} /> {/* catch-all at the end */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

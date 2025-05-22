@@ -1,8 +1,11 @@
+import Hero from './Hero'
 import Navbar from './Navbar'
 
 const Movies = () => {
   return (
-    <><Navbar /> Movies</>
+    <>
+    <Hero type="movies" />
+    <Navbar /></>
   )
 }
 
