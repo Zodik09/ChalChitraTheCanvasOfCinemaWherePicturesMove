@@ -1,5 +1,13 @@
+/* Global Styles */
+html, body{
+    background-color: black;
+}
+
+
+/* TailwindCSS */
 @import "tailwindcss";
 
+/* BeVietnamPro Font Faces */
 @font-face {
     font-family: FontBlack;
     src: url(../public/fonts/BeVietnamPro-Black.ttf);
@@ -29,3 +37,45 @@
     font-family: FontRegular;
     src: url(../public/fonts/BeVietnamPro-Regular.ttf);
 }
+
+
+/* Swiper.js */
+
+.swiper {
+  width: 100%;
+  /* height: 100%; */
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  /* height: 100%; */
+  object-fit: cover;
+}
+/* Default bullet color */
+.swiper-pagination-bullet {
+  background: rgb(0, 0, 0) !important;
+}
+
+/* Active bullet */
+.swiper-pagination-bullet-active {
+  background: white !important;
+}
+
+
+/* .overlay{
+
+background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, #000000 100%);
+
+} */

@@ -10,7 +10,7 @@ export const fetchNewMovies = createAsyncThunk(
                     path: "discover/movie",
                     include_adult: false,
                     include_video: false,
-                    page: 5,
+                    page: 1,
                     sort_by: "popularity.desc",
                     "release_date.lte": "2025-04-01",
                     language: "en-US",
