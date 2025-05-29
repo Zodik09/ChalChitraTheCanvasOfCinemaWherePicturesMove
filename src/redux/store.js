@@ -1,29 +1,37 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // uses localStorage
+import { configureStore } from "@reduxjs/toolkit";
+// import moviesReducer from "./counter/moviesSlice";
+// import tvShowsReducer from "./counter/tvShowsSlice";
+// import genresReducer from "./counter/genresSlice";
+// import languagesReducer from "./counter/languagesSlice";
+import mediaReducer from "./counter/mediaSlice";
+
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
 import { combineReducers } from "redux";
-import moviesReducer from './counter/moviesSlice'
-import tvShowsReducer from './counter/tvShowsSlice'
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["movies", "tvShows"], // ✅ Only persist these reducers
+ whitelist: ["media"], // ✅ Only persist these reducers
+//  whitelist: ["movies", "tvShows", "genres", "languages"], // ✅ Only persist these reducers
 };
 
 const rootReducer = combineReducers({
-  movies: moviesReducer,
-  tvShows: tvShowsReducer,
+ media: mediaReducer
 });
+// const rootReducer = combineReducers({
+//   movies: moviesReducer,
+//   tvShows: tvShowsReducer,
+//   genres: genresReducer,
+//   languages: languagesReducer,
+// });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false, // redux-persist needs this
-    }),
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export const persistor = persistStore(store);
