@@ -1,10 +1,10 @@
 // ✅ Clean version — no useRoutes
 import { Route, Routes } from "react-router-dom";
-import Home from "../components/Home";
-import TVShows from "../components/TVShows";
-import Movies from "../components/Movies";
-import Sports from "../components/Sports";
-import Search from "../components/Search";
+import Home from "../pages/Home";
+import TVShows from "../pages/TVShows";
+import Movies from "../pages/Movies";
+import Sports from "../pages/Sports";
+import Search from "../pages/Search";
 import NotFound from "../components/NotFound";
 
 const Router = () => {
