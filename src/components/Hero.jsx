@@ -1,100 +1,125 @@
-import { useSelector, useDispatch } from "react-redux";
-import { fetchNewMovies } from "../redux/counter/moviesSlice";
-import { fetchNewTVShows } from "../redux/counter/tvShowsSlice";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "./Loading";
+import {
+  fetchNewMovies,
+  fetchNewTVShows,
+  fetchTopRatedMovies,
+  fetchTopRatedTVShows,
+  fetchTrendingAll,
+  fetchTrendingMovies,
+  fetchTrendingTV,
+  fetchUpcomingMovies,
+  fetchNowPlayingMovies,
+  fetchPopularMovies,
+  fetchPopularTVShows,
+  fetchAiringTodayTV,
+} from "../redux/counter/mediaSlice";
 
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-
-import "../../src/index.css";
-
-// import required modules
-import { Pagination } from "swiper/modules";
-
-const Hero = ({ type = "all" }) => {
+const Hero = () => {
   const dispatch = useDispatch();
 
-  const { movies, loadMovies, errorMovies } = useSelector(
-    (state) => state.movies
-  );
-  const { tvShows, loadTVShows, errorTVShows } = useSelector(
-    (state) => state.tvShows
-  );
+  // Extracting all media data from Redux state
+  const {
+    newMovies,
+    newTVShows,
+    topRatedMovies,
+    topRatedTVShows,
+    trendingAll,
+    trendingMovies,
+    trendingTV,
+    upcomingMovies,
+    nowPlayingMovies,
+    popularMovies,
+    popularTVShows,
+    airingTodayTV,
+    isLoading,
+    error,
+  } = useSelector((state) => state.media);
 
   useEffect(() => {
-    if ((type === "all" || type === "movies") && movies.length === 0) {
-      dispatch(fetchNewMovies());
+    // Dispatching all API calls to fetch data
+    dispatch(fetchNewMovies());
+    dispatch(fetchNewTVShows());
+    dispatch(fetchTopRatedMovies());
+    dispatch(fetchTopRatedTVShows());
+    dispatch(fetchTrendingAll());
+    dispatch(fetchTrendingMovies());
+    dispatch(fetchTrendingTV());
+    dispatch(fetchUpcomingMovies());
+    dispatch(fetchNowPlayingMovies());
+    dispatch(fetchPopularMovies());
+    dispatch(fetchPopularTVShows());
+    dispatch(fetchAiringTodayTV());
+  }, [dispatch]);
+
+  // Log all fetched data
+  useEffect(() => {
+    if (!isLoading && !error) {
+      console.log("New Movies:", newMovies);
+      console.log("New TV Shows:", newTVShows);
+      console.log("Top Rated Movies:", topRatedMovies);
+      console.log("Top Rated TV Shows:", topRatedTVShows);
+      console.log("Trending All:", trendingAll);
+      console.log("Trending Movies:", trendingMovies);
+      console.log("Trending TV:", trendingTV);
+      console.log("Upcoming Movies:", upcomingMovies);
+      console.log("Now Playing Movies:", nowPlayingMovies);
+      console.log("Popular Movies:", popularMovies);
+      console.log("Popular TV Shows:", popularTVShows);
+      console.log("Airing Today TV Shows:", airingTodayTV);
+    } else if (error) {
+      console.error("Error fetching data:", error);
     }
-
-    if ((type === "all" || type === "tv") && tvShows.length === 0) {
-      dispatch(fetchNewTVShows());
-    }
-  }, [dispatch, type, movies.length, tvShows.length]);
-
-  let content = [];
-  if (type === "movies") content = movies;
-  else if (type === "tv") content = tvShows;
-  else {
-    content = [...movies, ...tvShows];
-    for (let i = content.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [content[i], content[j]] = [content[j], content[i]]; // Shuffle step
-    }
-  }
-
-  console.log(content);
-
-  const isLoading =
-    (type === "movies" && loadMovies) ||
-    (type === "tv" && loadTVShows) ||
-    loadMovies ||
-    loadTVShows;
-
-  const isError = errorMovies || errorTVShows;
-
-  if (isLoading) return <Loading />;
-  if (isError) return <p className="text-red-500">Error: {isError}</p>;
+  }, [
+    isLoading,
+    error,
+    newMovies,
+    newTVShows,
+    topRatedMovies,
+    topRatedTVShows,
+    trendingAll,
+    trendingMovies,
+    trendingTV,
+    upcomingMovies,
+    nowPlayingMovies,
+    popularMovies,
+    popularTVShows,
+    airingTodayTV,
+  ]);
 
   return (
-    <>
-      <Swiper
-        pagination={{
-          dynamicBullets: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-        {content.map((media) => (
-          <SwiperSlide className="relative">
-            <img
-              src={
-                media?.backdrop_path
-                  ? `https://image.tmdb.org/t/p/w500${media.backdrop_path}`
-                  : "https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-5529.jpg?t=st=1747911405~exp=1747915005~hmac=3587984f48c5a2adaa8504a122f5c0d87b5d1cbb6a051c077c8595f4d58ad6eb&w=1380"
-              }
-              alt={media?.title || media?.name}
-              className="h-[50vh]"
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      {content.map((media) => (
-        <div className="w-full bg-red-300">
-          <div className="">
-            <h1 className="text-white font-[FontBlack] text-4xl text-center mx-auto">
-              {media.original_name || media.original_title}
-            </h1>
+    <div className="hero-container">
+      {/* This is where you'll use the data to display */}
+      <h1>Welcome to ChalChitra!</h1>
+      {isLoading ? (
+        <Loading />
+      ) : error ? (
+        <div className="error">Error: {error}</div>
+      ) : (
+        <div>
+          {/* You can replace these with actual UI components to display data */}
+          <div>
+            <h2>New Movies</h2>
+            <ul>
+              {newMovies.map((movie) => (
+                <li key={movie.id}>{movie.title}</li>
+              ))}
+            </ul>
           </div>
+          <div>
+            <h2>Trending Movies</h2>
+            <ul>
+              {trendingMovies.map((movie) => (
+                <li key={movie.id}>{movie.title}</li>
+              ))}
+            </ul>
+          </div>
+          {/* Add more sections for other data like Popular TV Shows, Top Rated Movies, etc */}
         </div>
-      ))}
-    </>
+      )}
+    </div>
   );
 };
 
 export default Hero;
-// bg-linear-[180deg,transparent_0%,transparent_20%,black_100%]
