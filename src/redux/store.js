@@ -4,6 +4,7 @@ import { configureStore } from "@reduxjs/toolkit";
 // import genresReducer from "./counter/genresSlice";
 // import languagesReducer from "./counter/languagesSlice";
 import mediaReducer from "./counter/mediaSlice";
+import metaDataReducer from "./counter/metaDataSlice";
 
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -12,12 +13,13 @@ import { combineReducers } from "redux";
 const persistConfig = {
   key: "root",
   storage,
- whitelist: ["media"], // ✅ Only persist these reducers
+ whitelist: ["media", "metaData"], // ✅ Only persist these reducers
 //  whitelist: ["movies", "tvShows", "genres", "languages"], // ✅ Only persist these reducers
 };
 
 const rootReducer = combineReducers({
- media: mediaReducer
+ media: mediaReducer,
+ metaData: metaDataReducer
 });
 // const rootReducer = combineReducers({
 //   movies: moviesReducer,
