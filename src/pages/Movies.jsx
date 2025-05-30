@@ -1,12 +1,13 @@
-import Hero from '../components/Hero'
-import Navbar from '../components/Navbar'
+import Hero from "../components/Hero";
+import Navbar from "../components/Navbar";
 
 const Movies = () => {
   return (
     <>
-    <Hero type="movies" />
-    <Navbar /></>
-  )
-}
+      <Hero type="movies" />
+      <Navbar />
+    </>
+  );
+};
 
-export default Movies
+export default Movies;

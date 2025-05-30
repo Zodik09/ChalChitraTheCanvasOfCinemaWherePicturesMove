@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 const TVShows = () => {
   return (
     <>
-      <Hero type="tv" />
+      <Hero type="tvShows" />
       <Navbar />
     </>
   );
