@@ -1,39 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import moviesReducer from "./counter/moviesSlice";
-// import tvShowsReducer from "./counter/tvShowsSlice";
-// import genresReducer from "./counter/genresSlice";
-// import languagesReducer from "./counter/languagesSlice";
-import mediaReducer from "./counter/mediaSlice";
-import metaDataReducer from "./counter/metaDataSlice";
-
-import storage from "redux-persist/lib/storage";
-import { persistReducer, persistStore } from "redux-persist";
-import { combineReducers } from "redux";
-
-const persistConfig = {
-  key: "root",
-  storage,
- whitelist: ["media", "metaData"], // ✅ Only persist these reducers
-//  whitelist: ["movies", "tvShows", "genres", "languages"], // ✅ Only persist these reducers
-};
-
-const rootReducer = combineReducers({
- media: mediaReducer,
- metaData: metaDataReducer
-});
-// const rootReducer = combineReducers({
-//   movies: moviesReducer,
-//   tvShows: tvShowsReducer,
-//   genres: genresReducer,
-//   languages: languagesReducer,
-// });
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+import moviesReducer from "../redux/slices/movie";
+import tvShowsReducer from "../redux/slices/tvShow";
+import certificatesReducer from "../redux/slices/certificates";
+import genresReducer from "../redux/slices/genres";
+import languagesReducer from "../redux/slices/languages";
 
 export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }),
-});
-
-export const persistor = persistStore(store);
+  reducer: {
+    movies: moviesReducer,
+    tvShows: tvShowsReducer,
+    certificates: certificatesReducer,
+    genres: genresReducer,
+    languages: languagesReducer
+  },
+})
